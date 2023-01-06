@@ -1,0 +1,21 @@
+# 服务端口
+server:
+  port: 18084
+# 应用程序名称
+spring:
+  application:
+    name: dubbo-spring-consumer
+# Dubbo服务扫描路径
+dubbo:
+  scan:
+    base-packages: com.leaning
+  protocol:
+    name: dubbo
+    port: -1
+
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    file: ${user.home}/dubbo-cache/${spring.application.name}/dubbo.cache
+  spring:
+    provider:
+      version: 1.0.0

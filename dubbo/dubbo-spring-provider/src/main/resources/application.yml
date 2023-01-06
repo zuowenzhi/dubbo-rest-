@@ -1,0 +1,27 @@
+# 服务端口
+server:
+  port: 18081
+# 应用程序名称
+spring:
+  application:
+    name: dubbo-spring-provider
+# Dubbo服务扫描路径
+dubbo:
+  scan:
+    base-packages: com.leaning
+  protocols:
+    dubbo:
+      name: dubbo
+      port: 20882
+    rest:
+      name: rest
+      port: 20881
+      server: netty
+  registry:
+    address: nacos://127.0.0.1:8848/?namespace=dev
+  provider:
+    timeout: 6000
+    weight: 100 # 权重,如果有多个提供者,可以设置权重,在消费者调用的时候,负载均衡可以配置权重
+  spring:
+    provider:
+      version: 1.0.0

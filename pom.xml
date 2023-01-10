@@ -19,6 +19,7 @@
     <modules>
         <module>javaee</module>
         <module>dubbo</module>
+        <module>enterprise</module>
     </modules>
 
     <properties>

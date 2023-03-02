@@ -1,9 +1,8 @@
 package com.leaning.stream;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import cn.hutool.core.util.NumberUtil;
+
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -17,22 +16,64 @@ import java.util.stream.Stream;
 
 public class MyStreamDemo {
     public static void main(String[] args) {
-        User user1 = new User("111", "18", 180);
-        User user2 = new User("222", "18", 175);
-        User user3 = new User("333", "19", 170);
-
-        // stream流，创建的是动态数组，可以添加元素
-        List<User> userList = Stream.of(user1, user2, user3).collect(Collectors.toList());
+//        User user1 = new User("111", "18", 180);
+//        User user2 = new User("222", "18", 175);
+//        User user3 = new User("333", "19", 170);
+//
+//        // stream流，创建的是动态数组，可以添加元素
+//        List<User> userList = Stream.of(user1, user2, user3).collect(Collectors.toList());
+//        List<String> collect = userList.stream().map(User::getName).collect(Collectors.toList());
 //        show(userList);
 //        show1(userList);
 //        show2(userList);
-        demo();
+//        show5(2);
+//        demo();
+        String a ="sdafdasdfsaf";
+        String complementer = complementer(a);
+        System.out.println(complementer);
+    }
+
+    private static void show5(int gap ) {
+//      NumberUtil.generateRandomNumber(0,9,6)
+//        int[] ints = NumberUtil.generateRandomNumber(0,9,6);
+//
+//        for (int anInt : ints) {
+//            anInt
+//            System.out.print(anInt);
+//        }
+        System.out.println(String.format("%0" + gap + "d", 0));
+    }
+
+    public static String complementer(String preCardInfo){
+        if(preCardInfo.length()<75){
+            int gap = 75-preCardInfo.length();
+            String format = String.format("%0" + gap + "d", 0);
+//            String randomNumber=NumberUtil.genLengthZero(gap);
+            preCardInfo = preCardInfo+format;
+        }
+        return preCardInfo;
+    }
+
+    private static void show4() {
+        HashMap<String, User> user1 = new HashMap<>();
+        user1.put("type1",new User(1L,"jack"));
+        user1.put("type1",new User(2L,"lucy"));
+        user1.put("type1",new User(3L,"tom"));
+        HashMap<String, User> user2 = new HashMap<>();
+        user2.put("type1",new User(4L,"tom2"));
+
+//        Stream<Map.Entry<String, User>> concat = Stream.concat(user1.entrySet().stream(), user2.entrySet().stream());
+//        Map<String, User> collect = concat.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+//        System.out.println(collect);
+//        collect.forEach((k, v) -> System.out.println(k + "=:" + v));
+
+
     }
 
     private static void demo() {
 
-        LogStatus logStatus = LogStatus.valuesOf(2);
-        System.out.println(logStatus);
+//        LogStatus logStatus = LogStatus.valuesOf(2);
+//        System.out.println(logStatus);
     }
 
     private static void show2(List<User> userList) {
@@ -53,7 +94,7 @@ public class MyStreamDemo {
 
     }
 
-    private static void show1( List<User> userList) {
+    private static void show1(List<User> userList) {
         //list转map
 //        Map<String, User> userMap = new HashMap<>();
 //        for (User user : userList) {
@@ -68,14 +109,13 @@ public class MyStreamDemo {
          * （2）空指针异常，即转为map的value是null。这个可以用filter过滤；
          */
 
-        Map<String, User> userMap1= userList.stream().collect(Collectors.toMap(User::getName, Function.identity(),(key1, key2)->key2));
+        Map<String, User> userMap1 = userList.stream().collect(Collectors.toMap(User::getName, Function.identity(), (key1, key2) -> key2));
         List<User> userList1 = new ArrayList<>();
         for (String userName : userMap1.keySet()) {
             userList.add(userMap1.get(userName));
         }
 
-        List<User> userList2 = userMap1.entrySet().stream().map(e ->e.getValue()).collect(Collectors.toList());
-
+        List<User> userList2 = userMap1.entrySet().stream().map(e -> e.getValue()).collect(Collectors.toList());
 
 
     }
@@ -89,7 +129,7 @@ public class MyStreamDemo {
 //        List<User> userList1 = userList.stream().filter(user-> user.getName() != null).collect(Collectors.toList());
 
         //分组,user对象,按照age进行分组,相同的分为一组,放到一个集合中,再将age作为key,list作为value,返回一个集合
-        Map<String, List<User>> map =userList.stream().collect( Collectors.groupingBy(User::getAge, Collectors.toList()));
+        Map<String, List<User>> map = userList.stream().collect(Collectors.groupingBy(User::getAge, Collectors.toList()));
 
         System.out.println(map);
 

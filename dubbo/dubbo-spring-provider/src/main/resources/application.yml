@@ -13,10 +13,10 @@ dubbo:
     dubbo:
       name: dubbo
       port: 20882
-    rest:
-      name: rest
-      port: 20881
-      server: netty
+#    rest:
+#      name: rest
+#      port: 20881
+#      server: netty
   registry:
     address: nacos://127.0.0.1:8848/?namespace=dev
   provider:

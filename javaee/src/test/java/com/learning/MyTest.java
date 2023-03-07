@@ -1,7 +1,11 @@
 package com.learning;
 
+import cn.hutool.core.date.DatePattern;
 import com.leaning.enums.YesNo;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @Auther: zuowenzhi 2023/2/7 created
@@ -69,6 +73,14 @@ public class MyTest {
         } else {
             System.out.println("第二个号段未被第一个号段包含");
         }
+    }
+
+    @Test
+    public void testDateFormat(){
+        LocalDateTime localDateTime = LocalDateTime.now();
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("yyMM");
+        String format = localDateTime.format(df);
+        System.out.println(format);
     }
 
 }

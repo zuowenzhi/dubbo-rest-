@@ -83,6 +83,14 @@ public class MyTest {
         System.out.println(format);
     }
 
+    @Test
+    public void testRegix(){
+        String regex = "[0,1]{1}";
+        String num = "b";
+
+        System.out.println(num.matches(regex));
+    }
+
 }
 
 

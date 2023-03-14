@@ -1,11 +1,14 @@
 package com.learning;
 
 import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.util.DesensitizedUtil;
+import cn.hutool.core.util.StrUtil;
 import com.leaning.enums.YesNo;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 /**
  * @Auther: zuowenzhi 2023/2/7 created
@@ -85,10 +88,23 @@ public class MyTest {
 
     @Test
     public void testRegix(){
-        String regex = "[0,1]{1}";
-        String num = "b";
+        UUID uuid = UUID.randomUUID();
+        System.out.println(uuid);
+//        String regex = "[0,1]{1}";
+//        String num = "b";
+//
+//        System.out.println(num.matches(regex));
+    }
 
-        System.out.println(num.matches(regex));
+    @Test
+    public void strReplace(){
+        String s = DesensitizedUtil.mobilePhone("18612345678");
+        String name = "左文智的";
+        String replace = StrUtil.replace("15877656545", 3, 7, '*');
+        String replace2 = StrUtil.replace(name, 1, name.length(), '*');
+        System.out.println(replace);
+        System.out.println(replace2);
+        System.out.println(s);
     }
 
 }

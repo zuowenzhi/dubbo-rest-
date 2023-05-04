@@ -22,5 +22,9 @@ public interface StudentConverter {
             @Mapping(source = "birthday",target = "birthday",dateFormat = "yyyy-MM-dd")
     })
     StudentDto converter(Student student, String address, LocalDateTime birthday);
+//    @Mappings({
+//            @Mapping(target = "cardLevel",expression = "java(CardLevel.valuesOf(studentDto.cardLevel))")
+//    })
+//    Student converterDto2Entity(StudentDto studentDto);
 }
 

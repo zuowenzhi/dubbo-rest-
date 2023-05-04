@@ -1,5 +1,6 @@
 package com.learning;
 
+import com.learning.enums.CardLevel;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -15,6 +16,7 @@ public class Student {
     private String clazz;
     private Integer age;
     private LocalDateTime birthday;
+    private CardLevel cardLevel;
 }
 
 

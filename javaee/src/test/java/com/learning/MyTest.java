@@ -6,8 +6,13 @@ import cn.hutool.core.util.StrUtil;
 import com.leaning.enums.YesNo;
 import org.junit.jupiter.api.Test;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -105,6 +110,24 @@ public class MyTest {
         System.out.println(replace);
         System.out.println(replace2);
         System.out.println(s);
+    }
+
+    @Test
+    public void testLIstSize(){
+        ArrayList<String> strings = new ArrayList<>();
+        strings.add("1");
+        strings.add("1");
+        strings.add("1");
+        System.out.println(strings.toString().length());
+    }
+
+    @Test
+    public void test8(){
+        Instant instant = new Date().toInstant();
+        ZoneId zoneId = ZoneId.systemDefault();
+        System.out.println(instant+"----"+zoneId);
+        LocalDateTime localBillDateTime = LocalDateTime.ofInstant(instant,zoneId);
+        System.out.println(localBillDateTime);
     }
 
 }

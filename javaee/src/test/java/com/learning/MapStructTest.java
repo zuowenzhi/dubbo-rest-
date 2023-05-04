@@ -7,8 +7,11 @@ import cn.hutool.core.util.RandomUtil;
 import org.junit.jupiter.api.Test;
 
 import java.security.SecureRandom;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @Auther: zuowenzhi 2023/3/2 created
@@ -25,6 +28,15 @@ public class MapStructTest {
         student.setName("name");
         StudentDto converter = StudentConverter.INSTANCE.converter(student, "地址信息", LocalDateTime.now());
         System.out.println(converter);
+    }
+
+    @Test
+    public void test3() {
+//        StudentDto studentDto = new StudentDto();
+//        studentDto.setName("name");
+//        studentDto.setCardLevel("1");
+//        Student converter = StudentConverter.INSTANCE.converterDto2Entity(studentDto);
+//        System.out.println(converter);
     }
 
     @Test
@@ -67,6 +79,20 @@ public class MapStructTest {
 //        String code = lineCaptcha.getCode();
 //        System.out.println(code);
     }
+
+    @Test
+    public void isLegalTime() {
+        String formatTime = "^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29) (20|21|22|23|[0-1][0-9]):[0-5][0-9]:[0-5][0-9]$";
+        String dateTime ="";
+        System.out.println(dateTime.matches(formatTime));
+    }
+
+    @Test
+    public void time() {
+        LocalDate max = LocalDate.parse("9999-12-31");
+        System.out.println(max);
+    }
+
 }
 
 

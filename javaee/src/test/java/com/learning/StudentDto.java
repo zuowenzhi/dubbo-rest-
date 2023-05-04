@@ -17,6 +17,7 @@ public class StudentDto {
     private String address;
     private Integer age;
     private LocalDateTime birthday;
+    public String cardLevel;
 }
 
 

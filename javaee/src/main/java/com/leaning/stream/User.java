@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 public class User {
 	private Long id;
 	private String name;
-	private String age;
+	private int age;
 	private int height;
 
 	public User(Long id, String name) {
@@ -17,6 +17,9 @@ public class User {
 		this.name = name;
 	}
 
-
-	// setter、getter方法我就不写了
+	public User(String name,int age, int height) {
+		this.age = age;
+		this.height = height;
+		this.name = name;
+	}
 }

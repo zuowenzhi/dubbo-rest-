@@ -129,9 +129,9 @@ public class MyStreamDemo {
 //        List<User> userList1 = userList.stream().filter(user-> user.getName() != null).collect(Collectors.toList());
 
         //分组,user对象,按照age进行分组,相同的分为一组,放到一个集合中,再将age作为key,list作为value,返回一个集合
-        Map<String, List<User>> map = userList.stream().collect(Collectors.groupingBy(User::getAge, Collectors.toList()));
-
-        System.out.println(map);
+//        Map<String, List<User>> map = userList.stream().collect(Collectors.groupingBy(User::getAge, Collectors.toList()));
+//
+//        System.out.println(map);
 
         //求和
         // int、double、long:

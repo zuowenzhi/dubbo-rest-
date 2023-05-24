@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 /**
@@ -47,6 +48,24 @@ public class StreamTest {
 
     private static String fetchGroupKey(User user){
         return user.getAge() +"_"+ user.getHeight();
+    }
+
+    @Test
+    public void sumOfListObject() {
+        ArrayList<User> users = new ArrayList<>();
+        users.add(new User("张三7", 17, 170));
+        users.add(new User("张三8", 18, 170));
+        AtomicInteger sum = new AtomicInteger();
+        users.stream().forEach(user -> sum.addAndGet(user.getHeight()));
+        System.out.println(sum);
+
+
+        int sum1 = users.stream().mapToInt(User::getHeight).sum();
+        System.out.println(sum1);
+
+        //reduce方法
+        long reduce = users.stream().mapToLong(User::getHeight).reduce(0, Long::sum);
+        System.out.println(reduce);
     }
 }
 

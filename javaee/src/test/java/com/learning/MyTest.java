@@ -2,8 +2,10 @@ package com.learning;
 
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.util.DesensitizedUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.leaning.enums.YesNo;
+import com.leaning.util.NumberUtil;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
@@ -128,6 +130,14 @@ public class MyTest {
         System.out.println(instant+"----"+zoneId);
         LocalDateTime localBillDateTime = LocalDateTime.ofInstant(instant,zoneId);
         System.out.println(localBillDateTime);
+    }
+
+    @Test
+    public void test10(){
+        for (int i = 0; i < 10; i++) {
+//            System.out.println(NumberUtil.genRandomIntNumber6());
+            System.out.println(RandomUtil.randomNumbers(6));
+        }
     }
 
 }

@@ -6,6 +6,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.leaning.enums.YesNo;
 import com.leaning.util.NumberUtil;
+import com.leaning.util.TestUtil;
 import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
@@ -138,6 +139,18 @@ public class MyTest {
 //            System.out.println(NumberUtil.genRandomIntNumber6());
             System.out.println(RandomUtil.randomNumbers(6));
         }
+    }
+
+    @Test
+    public void testRange(){
+        System.out.println(TestUtil.checkRangeLength("10001", "19"));
+    }
+
+    @Test
+    public void testLength(){
+        String regex="^(?!0{5,8}$)\\d{5}(\\d{3})?$";
+        String number= "00000";
+        System.out.println(number.matches(regex));
     }
 
 }

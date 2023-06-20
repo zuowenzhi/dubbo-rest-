@@ -153,6 +153,11 @@ public class MyTest {
         System.out.println(number.matches(regex));
     }
 
+    @Test
+    public void testLengthFormat(){
+        System.out.println(TestUtil.int2Str(12, "16"));
+    }
+
 }
 
 

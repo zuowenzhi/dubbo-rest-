@@ -155,7 +155,9 @@ public class MyTest {
 
     @Test
     public void testLengthFormat(){
-        System.out.println(TestUtil.int2Str(12, "16"));
+
+        System.out.println(String.format("%99d", 0));
+//        System.out.println(TestUtil.int2Str(12, "16"));
     }
 
 }

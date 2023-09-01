@@ -2,6 +2,10 @@ package com.leaning.stream;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -14,14 +18,14 @@ import java.util.stream.Collectors;
 
 public class StreamTest {
     @Test
-    public void groupByTest(){
+    public void groupByTest() {
         ArrayList<User> users = new ArrayList<>();
-        users.add(new User("张三7",17,170));
-        users.add(new User("张三8",18,170));
-        users.add(new User("张三9",18,170));
-        users.add(new User("张三20",20,180));
-        users.add(new User("李四17",17,170));
-        users.add(new User("赵四20",20,180));
+        users.add(new User("张三7", 17, 170));
+        users.add(new User("张三8", 18, 170));
+        users.add(new User("张三9", 18, 170));
+        users.add(new User("张三20", 20, 180));
+        users.add(new User("李四17", 17, 170));
+        users.add(new User("赵四20", 20, 180));
 
         //按照User类的多个字段进行分类,比如年龄和身高两个字段进行分组,fetchGroupKey方法里边定义了分组规则,
         Map<String, List<User>> collect = users.stream().collect(Collectors.groupingBy(e -> fetchGroupKey(e)));
@@ -45,8 +49,8 @@ public class StreamTest {
 
     }
 
-    private static String fetchGroupKey(User user){
-        return user.getAge() +"_"+ user.getHeight();
+    private static String fetchGroupKey(User user) {
+        return user.getAge() + "_" + user.getHeight();
     }
 
     @Test
@@ -83,10 +87,47 @@ public class StreamTest {
         System.out.println(collect);
 
         //根据某个字段去重,然后根据这个字段进行提取,得到不重复的集合,
-        List<Integer> collect2  =users.stream().distinct().map(User::getAge).collect(Collectors.toList());
+        List<Integer> collect2 = users.stream().distinct().map(User::getAge).collect(Collectors.toList());
         System.out.println(collect2);
 //        users.stream().collect(Collectors.collectingAndThen(Collectors.toCollection(()->new TreeSet<>(Comparator.comparing(o->o.getHeight())))));
 //
+    }
+
+    @Test
+    public void testEnum() {
+        CardStatus preSale = CardStatus.valuesOf("PRE_SALE");
+        System.out.println(preSale);
+    }
+
+    @Test
+    public void testRegex() {
+        String regex = "^(?!0+$)\\d+$";
+        System.out.println("00001000".matches(regex));
+
+    }
+
+    @Test
+    public void testLocalDateTime() {
+//        LocalDateTime dateTime1 = LocalDateTime.of(2023, 9, 1, 10, 30);
+//        LocalDateTime dateTime2 = LocalDateTime.of(2023, 9, 1, 15, 45);
+////        LocalDateTime dateTime1 = LocalDateTime.now();
+////        LocalDateTime dateTime2 = LocalDateTime.now();
+//        boolean isEqual = dateTime1.toLocalDate().isEqual(dateTime2.toLocalDate());
+//        System.out.println("dateTime1 is equal to dateTime2: " + isEqual);
+
+//        LocalDate date = LocalDate.parse("9999-12-31");
+//        LocalDate startDate = LocalDate.of(1970, 1, 1);
+//        long days = ChronoUnit.DAYS.between(startDate, date);
+//        int dateValue = (int) days;
+//
+//        System.out.println("Date as integer: " + dateValue);
+
+        int dateValue = 2932896; // 假设计算后的天数为10000
+
+        LocalDate startDate = LocalDate.of(1970, 1, 1);
+        LocalDate calculatedDate = startDate.plusDays(dateValue);
+
+        System.out.println("Calculated Date: " + calculatedDate);
     }
 
 }

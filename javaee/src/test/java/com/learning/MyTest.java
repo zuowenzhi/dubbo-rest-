@@ -5,10 +5,14 @@ import cn.hutool.core.util.DesensitizedUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.leaning.enums.YesNo;
+import com.leaning.stream.CardStatus;
+import com.leaning.util.LuhnUtils;
 import com.leaning.util.NumberUtil;
 import com.leaning.util.TestUtil;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 
+import java.text.MessageFormat;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -49,8 +53,9 @@ public class MyTest {
     @Test
     public void test6(){
         String re="^(?![0]{8})[0-9]{8}$";
-        String a="00000100";
-        boolean matches = a.matches(re);
+        String phone="^((([0-9]{3}[1-9]|[0-9]{2}[1-9][0-9]{1}|[0-9]{1}[1-9][0-9]{2}|[1-9][0-9]{3})(((0[13578]|1[02])(0[1-9]|[12][0-9]|3[01]))|((0[469]|11)(0[1-9]|[12][0-9]|30))|(02(0[1-9]|[1][0-9]|2[0-8]))))|((([0-9]{2})(0[48]|[2468][048]|[13579][26])|((0[48]|[2468][048]|[3579][26])00))0229))([0-1]?[0-9]|2[0-3])([0-5][0-9])([0-5][0-9])$";
+        String a="20230711111848";
+        boolean matches = a.matches(phone);
         System.out.println(matches);
     }
 
@@ -148,7 +153,8 @@ public class MyTest {
 
     @Test
     public void testLength(){
-        String regex="^(?!0{5,8}$)\\d{5}(\\d{3})?$";
+//        String regex="^(?!0{5,8}$)\\d{5}(\\d{3})?$";
+        String regex="^\\d+$";
         String number= "00000";
         System.out.println(number.matches(regex));
     }
@@ -157,8 +163,90 @@ public class MyTest {
     public void testLengthFormat(){
 
         System.out.println(String.format("%99d", 0));
-//        System.out.println(TestUtil.int2Str(12, "16"));
+        String s = MessageFormat.format("测试{0}数据", "阿斯顿发斯蒂芬");
+        System.out.println(s); // 输出: "测试阿斯顿发斯蒂芬"
     }
+
+
+    @Test
+    public void testMath(){
+        int abs = Math.abs(1);
+        System.out.println(abs);
+    }
+
+    @Test
+    public void teststrUtil(){
+        String cardNo= "6236681234100615";
+        int len = cardNo.length();
+        String cardPadding= StrUtil.fill(cardNo.substring(0,6),'*',9,false);
+        String substring = cardNo.substring(len - 4);
+        System.out.println(String.format("%s%s", cardPadding, substring));
+
+
+        String str = "Hello";
+        int targetLength = 10;
+
+        // 在字符串左侧填充指定字符到目标长度
+        String filledStrLeft = StrUtil.fill(str,  '!',targetLength,false);
+        System.out.println(filledStrLeft); // Output: !!!!!Hello
+//
+//        // 在字符串右侧填充指定字符到目标长度
+//        String filledStrRight = StrUtil.fillAfter(str, targetLength, '#');
+//        System.out.println(filledStrRight); // Output: Hello#####
+//
+//        // 在字符串两侧填充指定字符到目标长度
+//        String filledStrBoth = StrUtil.fillBoth(str, targetLength, '*');
+//        System.out.println(filledStrBoth); // Output: **Hello***
+//
+//        // 在字符串左侧填充指定字符到目标长度，且保留原字符串的右侧字符
+//        String filledStrLeftPreserve = StrUtil.fillBeforePreserve(str, targetLength, '^');
+//        System.out.println(filledStrLeftPreserve); // Output: ^^Hello
+//
+//        // 在字符串右侧填充指定字符到目标长度，且保留原字符串的左侧字符
+//        String filledStrRightPreserve = StrUtil.fillAfterPreserve(str, targetLength, '&');
+//        System.out.println(filledStrRightPreserve); // Output: Hello&&&&&&&
+//
+//        // 在字符串两侧填充指定字符到目标长度，且保留原字符串的左右字符
+//        String filledStrBothPreserve = StrUtil.fillBothPreserve(str, targetLength, '$');
+//        System.out.println(filledStrBothPreserve); // Output: $$Hello$$$
+    }
+
+
+    @Test
+    public void testPwd(){
+        String strHex = Long.toHexString(System.currentTimeMillis());
+        String rand= RandomStringUtils.randomAlphanumeric(1)+strHex.substring(strHex.length()-6,strHex.length())+RandomStringUtils.randomAlphanumeric(9);
+        System.out.println(rand);//Z5965cfsU72CKYuY  Q546eb2R3xxtsfTY
+    }
+
+    @Test
+    public void testToken(){
+        /*
+        * card_token_start 是个6位数字
+        * token规则：card_token_start+（卡号长度-card_token_start-1）随机数+1校验位
+        * */
+        String cardToken = genToken("283713", "16");
+        System.out.println(cardToken);//2837135598181013
+    }
+
+    private String genToken(String cardTokenStart,String cardNoLen){
+        int randomLen = Integer.parseInt(cardNoLen)-cardTokenStart.length()-1;
+        String randomNumber = RandomUtil.randomNumbers(randomLen);
+        String a= cardTokenStart + randomNumber;
+        String b= cardTokenStart.concat(randomNumber);
+        int i = LuhnUtils.generateCheckDigit(a);
+        int j = LuhnUtils.generateCheckDigit(b);
+        System.out.println(j);
+        return String.format("%s%s%s",cardTokenStart,randomNumber,i);
+    }
+
+
+    @Test
+    public void testEnum(){
+        CardStatus[] values = CardStatus.values();
+        Arrays.stream(values).forEach(status-> System.out.println(status));
+    }
+
 
 }
 

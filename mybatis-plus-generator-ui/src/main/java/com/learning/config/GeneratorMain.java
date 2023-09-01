@@ -31,7 +31,7 @@ public class GeneratorMain {
      }
     }).basePackage("com.github.davidfantasy.mybatisplustools.example").port(8068).build();
  
-  MybatisPlusToolsApplication.run(config);
+    MybatisPlusToolsApplication.run(config);
  
  }
  
